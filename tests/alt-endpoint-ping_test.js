@@ -95,18 +95,17 @@ describe('alt.endpoint-ping', function() {
 
     it('deve chamar o endpoint corretamente', function() {
       var _endpoint = '/a';
-      var _erro = {a: true};
 
       _provider.url = _endpoint;
 
-      _httpBackend.expectPOST(_endpoint, null).respond(400, _erro);
+      _httpBackend.expectPOST(_endpoint, null).respond(200);
 
       _altPing(_endpoint)
         .then(function() {
-          expect(true).toBe(false);
+          expect(true).toBe(true);
         })
         .catch(function(erro) {
-          expect(erro.data.a).toEqual(_erro.a);
+          expect(true).toBe(false);
         });
 
       _httpBackend.flush();
